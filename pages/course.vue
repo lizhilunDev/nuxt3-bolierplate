@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const { courses } = useCourses();
+</script>
+
 <template>
   <q-page padding>
     <div class="row q-col-gutter-md">
@@ -25,7 +29,3 @@
     </div>
   </q-page>
 </template>
-
-<script setup lang="ts">
-const { courses } = useCourses();
-</script>
