@@ -1,9 +1,12 @@
+<script setup lang="ts">
+const nuxtApp = useNuxtApp();
+console.log('nuxtApp', nuxtApp);
+</script>
+
 <template>
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
 </template>
-
-<script setup lang="ts"></script>
 
 <style scoped></style>
