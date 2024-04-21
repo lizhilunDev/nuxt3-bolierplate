@@ -1,22 +1,52 @@
 <script setup lang="ts">
+definePageMeta({
+  key: (route) => route.fullPath,
+  title: 'My home page',
+  pageType: '',
+  // keepalive: true,
+  alias: ['/lecture/:courseSlug'],
+  validate: (route) => {
+    /**
+     * 1] definePageMeta 매크로 함수는 컴파일시 호이스팅 되기 때문에
+     * 외부의 course 변수에 접근할 수 없다. 그래서 다시 useCourse를 가져와야한다.
+     */
+    const courseSlug = route.params.courseSlug as string;
+    const { course } = useCourse(courseSlug);
+    if (!course) {
+      // return false;
+      return createError({
+        statusCode: 404,
+        statusMessage: 'Course not found',
+      });
+    }
+    return true;
+  },
+});
+
 const route = useRoute();
 
 const courseSlug = route.params.courseSlug as string;
 const { course, prevCourse, nextCourse } = useCourse(courseSlug);
 
-definePageMeta({
-  key: (route) => route.fullPath,
-  title: 'My home page',
-  pageType: '',
-  keepalive: true,
-  alias: ['/lecture/:courseSlug'],
-});
+// if (!course) {
+//   throw createError({
+//     statusCode: 404,
+//     statusMessage: 'Course not found',
+//   });
+// }
 
 const memo = ref('');
 const completed = ref(false);
 
 const movePage = async (path: string) => {
   await navigateTo(path);
+};
+
+const toggleComplete = () => {
+  // $fetch('/api/error');
+  // showError('에러가 발생했습니다.');
+  completed.value = !completed.value;
+  throw createError('에러가 발생했습니다.');
 };
 </script>
 
@@ -73,7 +103,7 @@ const movePage = async (path: string) => {
         unelevated
         :outline="completed ? false : true"
         :icon="completed ? 'check' : undefined"
-        @click="completed = !completed"
+        @click="toggleComplete"
       />
       <q-input
         v-model="memo"
