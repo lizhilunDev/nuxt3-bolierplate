@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { signIn } = useAuth();
 const emit = defineEmits<{
   success: [];
 }>();
@@ -16,7 +17,7 @@ const handleLoginSubmit = () => {
     error.value = null;
     loading.value = true;
 
-    // login business logic
+    signIn(form.value.email, form.value.passwowrd);
 
     emit('success');
   } catch (err: unknown) {
@@ -26,9 +27,7 @@ const handleLoginSubmit = () => {
       throw Error;
     }
   } finally {
-    setTimeout(() => {
-      loading.value = false;
-    }, 1500);
+    loading.value = false;
   }
 };
 </script>
@@ -38,7 +37,7 @@ const handleLoginSubmit = () => {
     <q-input v-model="form.email" filled label="email" />
 
     <q-input v-model="form.passwowrd" filled type="password" label="password" />
-
+    <div v-if="error" class="text-red text-center">{{ error.message }}</div>
     <div class="q-mt-lg">
       <q-btn
         class="full-width"
