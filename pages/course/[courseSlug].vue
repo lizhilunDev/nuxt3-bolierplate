@@ -3,23 +3,20 @@ definePageMeta({
   key: (route) => route.fullPath,
   title: 'My home page',
   pageType: '',
-  // keepalive: true,
   alias: ['/lecture/:courseSlug'],
-  validate: (route) => {
-    /**
-     * 1] definePageMeta 매크로 함수는 컴파일시 호이스팅 되기 때문에
-     * 외부의 course 변수에 접근할 수 없다. 그래서 다시 useCourse를 가져와야한다.
-     */
+  middleware: (route) => {
     const courseSlug = route.params.courseSlug as string;
     const { course } = useCourse(courseSlug);
     if (!course) {
-      // return false;
-      return createError({
-        statusCode: 404,
-        statusMessage: 'Course not found',
-      });
+      // return navigateTo('/');
+      return abortNavigation(
+        createError({
+          statusCode: 404,
+          statusMessage: 'Course not found',
+          fatal: true,
+        })
+      );
     }
-    return true;
   },
 });
 
@@ -93,7 +90,7 @@ const toggleComplete = () => {
         />
       </div>
     </div>
-    <p class="q-mt-lg text-grey-8">{{ course?.content }}</p>
+    <PageDescription :description="course?.content || ''" />
     <q-separator class="q-mb-lg" />
     <q-form class="q-gutter-y-md">
       <q-btn
