@@ -1,13 +1,3 @@
-<script setup lang="ts">
-export interface Props {
-  src?: string;
-}
-
-withDefaults(defineProps<Props>(), {
-  src: 'https://www.youtube.com/embed/zmq2zu-UsRk',
-});
-</script>
-
 <template>
   <div class="video-container">
     <iframe
@@ -21,6 +11,15 @@ withDefaults(defineProps<Props>(), {
     ></iframe>
   </div>
 </template>
+
+<script setup lang="ts">
+interface Props {
+  src?: string;
+}
+withDefaults(defineProps<Props>(), {
+  src: 'https://www.youtube.com/embed/zmq2zu-UsRk',
+});
+</script>
 
 <style scoped>
 .video-container {

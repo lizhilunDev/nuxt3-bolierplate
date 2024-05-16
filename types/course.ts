@@ -15,14 +15,14 @@ export interface Course {
 
 export interface CourseWithPath
   extends Omit<Course, 'rating' | 'reviewsCount' | 'studentCount'> {
-  path: string;
   rating: string;
   reviewsCount: string;
   studentCount: string;
+  path: string;
 }
 
 export interface CourseReturn {
-  course: Maybe<CourseWithPath>;
+  course: Maybe<CourseWithPath>; // Course | null | undefined
   prevCourse: Maybe<CourseWithPath>;
   nextCourse: Maybe<CourseWithPath>;
 }

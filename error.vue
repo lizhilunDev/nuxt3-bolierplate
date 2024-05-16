@@ -1,16 +1,3 @@
-<script setup lang="ts">
-defineProps({
-  error: {
-    type: Object,
-    default: () => ({}),
-  },
-});
-
-const globalError = useError();
-
-const handleError = () => clearError({ redirect: '/' });
-</script>
-
 <template>
   <div class="flex flex-center column window-height text-center">
     <div class="text-h1">{{ error.statusCode }}</div>
@@ -21,7 +8,7 @@ const handleError = () => clearError({ redirect: '/' });
     </p>
     <div class="text-h6">useError</div>
     <p class="text-subtitle2">
-      {{ JSON.stringify(globalError) }}
+      {{ JSON.stringify(globalEerror) }}
     </p>
     <q-btn
       label="Go Home"
@@ -32,5 +19,19 @@ const handleError = () => clearError({ redirect: '/' });
     />
   </div>
 </template>
+
+<script setup lang="ts">
+defineProps({
+  error: {
+    type: Object,
+    default: () => ({}),
+  },
+});
+
+const globalEerror = useError();
+
+// const handleError = () => clearError();
+const handleError = () => clearError({ redirect: '/' });
+</script>
 
 <style scoped></style>

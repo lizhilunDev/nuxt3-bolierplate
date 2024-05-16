@@ -1,5 +1,5 @@
 <template>
-  <p class="q-mt-sm text-grey-8">{{ description }}</p>
+  <p class="text-subtitle1 q-mb-xl">{{ description }}</p>
 </template>
 
 <script setup lang="ts">

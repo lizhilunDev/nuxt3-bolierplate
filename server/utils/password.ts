@@ -1,6 +1,3 @@
-export const verifyPassword = async (
-  userPassword: string,
-  password: string
-) => {
+export const verifyPassword = (userPassword: string, password: string) => {
   return userPassword === password;
 };

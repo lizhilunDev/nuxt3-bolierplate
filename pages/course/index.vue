@@ -6,6 +6,7 @@
         <PageDescription
           description="웹개발 입문부터, Vue 프론트엔드 실전 그리고 실무 활용법까지 함께 시작해봐요!"
         />
+        <div class="text-subtitle1 text-grey-8 q-mt-sm"></div>
         <q-btn
           label="시작하기"
           class="q-mt-lg"

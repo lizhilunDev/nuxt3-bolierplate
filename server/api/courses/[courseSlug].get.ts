@@ -7,7 +7,7 @@ export default defineEventHandler((event) => {
   if (!courseDetails.course) {
     throw createError({
       statusCode: 500,
-      statusMessage: 'Course not found',
+      statusMessage: 'Server Error',
     });
   }
 

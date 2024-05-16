@@ -16,5 +16,5 @@ const users: User[] = [
 ];
 
 export function getUserByEmail(email: string) {
-  return users.find((u) => u.email === email);
+  return users.find((user) => user.email === email);
 }

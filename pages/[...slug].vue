@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <q-page padding>
     <div class="text-center q-py-xl">
@@ -12,5 +10,3 @@
     </div>
   </q-page>
 </template>
-
-<style scoped></style>

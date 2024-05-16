@@ -2,33 +2,9 @@
   <div>
     <NuxtLayout name="admin">
       <template #header>
-        <q-header elevated class="bg-red text-white">
+        <q-header elevated class="bg-primary text-white">
           <q-toolbar>
             <q-toolbar-title>Vue & Nuxt Mastery Admin</q-toolbar-title>
-            <q-separator dark vertical />
-            <NuxtLink v-slot="{ navigate }" custom to="/admin/override-layout">
-              <q-btn
-                stretch
-                flat
-                label="Override Layout"
-                no-caps
-                @click="navigate()"
-              />
-            </NuxtLink>
-            <q-separator dark vertical />
-            <NuxtLink v-slot="{ navigate }" custom to="/admin/dynamic-layout">
-              <q-btn
-                stretch
-                flat
-                label="Dynamic Layout"
-                no-caps
-                @click="navigate()"
-              />
-            </NuxtLink>
-            <q-separator dark vertical />
-            <NuxtLink v-slot="{ navigate }" custom to="/">
-              <q-btn stretch flat label="Home" no-caps @click="navigate()" />
-            </NuxtLink>
           </q-toolbar>
         </q-header>
       </template>

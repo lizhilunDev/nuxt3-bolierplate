@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <q-page padding>
     <div class="q-my-xl text-center">
@@ -8,5 +6,7 @@
     </div>
   </q-page>
 </template>
+
+<script setup lang="ts"></script>
 
 <style scoped></style>

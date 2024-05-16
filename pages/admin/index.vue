@@ -1,9 +1,3 @@
-<script setup lang="ts">
-definePageMeta({
-  layout: 'admin',
-});
-</script>
-
 <template>
   <q-page padding>
     <div class="q-my-xl text-center">
@@ -12,5 +6,11 @@ definePageMeta({
     </div>
   </q-page>
 </template>
+
+<script setup lang="ts">
+definePageMeta({
+  layout: 'admin',
+});
+</script>
 
 <style scoped></style>

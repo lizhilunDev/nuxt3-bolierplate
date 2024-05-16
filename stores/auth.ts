@@ -5,8 +5,15 @@ export const useAuthStore = defineStore(
   () => {
     const authUser = ref<Maybe<UserWithoutPassword>>();
 
-    const signIn = (email: string, password: string) => {
-      const foundUser = getUser(email, password);
+    const signIn = async (email: string, password: string) => {
+      const data = await $fetch<{ user: UserWithoutPassword }>('/auth/login', {
+        method: 'POST',
+        body: {
+          email,
+          password,
+        },
+      });
+      const { user: foundUser } = data;
 
       if (!foundUser) {
         throw createError({
@@ -14,28 +21,40 @@ export const useAuthStore = defineStore(
           statusMessage: 'Invalid email or password',
         });
       }
+
       setUser(foundUser);
     };
 
     const setUser = (user: Maybe<UserWithoutPassword>) =>
       (authUser.value = user);
 
-    const signOut = () => setUser(null);
+    const signOut = async () => {
+      await $fetch('/auth/logout', { method: 'POST' });
+      setUser(null);
+    };
+
+    const fetchUser = async () => {
+      const data = await $fetch<{ user: UserWithoutPassword }>('/auth/user', {
+        headers: useRequestHeaders(['cookie']),
+      });
+      setUser(data.user);
+    };
 
     return {
-      signIn,
-      signOut,
       user: authUser,
       isAuthenticated: computed(() => !!authUser.value),
       isAdmin: computed(() =>
-        !authUser.value ? false : authUser.value?.roles.includes('ADMIN')
+        !authUser.value ? false : authUser.value.roles.includes('ADMIN')
       ),
+      signIn,
+      signOut,
+      fetchUser,
     };
+  },
+  {
+    persist: true,
+    // persist: {
+    //   storage: persistedState.localStorage,
+    // },
   }
-  // { persist: true }
-  // {
-  // persist: {
-  //   storage: persistedState.localStorage,
-  // },
-  // }
 );

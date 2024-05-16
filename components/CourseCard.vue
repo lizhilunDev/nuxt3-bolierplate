@@ -1,20 +1,3 @@
-<script setup lang="ts">
-interface Props {
-  thumbnail: string;
-  title: string;
-  subtitle: string;
-}
-withDefaults(defineProps<Props>(), {
-  thumbnail: '',
-  title: '',
-  subtitle: '',
-});
-
-defineEmits<{
-  click: [];
-}>();
-</script>
-
 <template>
   <q-card class="my-card" @click="$emit('click')">
     <img :src="thumbnail" />
@@ -27,3 +10,16 @@ defineEmits<{
     </q-card-section>
   </q-card>
 </template>
+
+<script setup lang="ts">
+interface Props {
+  thumbnail: string;
+  title: string;
+  subtitle: string;
+}
+defineProps<Props>();
+
+defineEmits<{
+  click: [];
+}>();
+</script>

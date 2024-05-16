@@ -1,5 +1,4 @@
 import type { Course, CourseWithPath, CourseReturn } from '~/types/course';
-
 const courses: Course[] = [
   {
     courseSlug: 'html-css',
@@ -130,14 +129,29 @@ const courses: Course[] = [
     content: `안녕하세요! 이번 강의는 Vue3와 Firebase를 활용하여 커뮤니티 웹을 만드는 강의로, 이번 강의를 수강하신다면 Vue3 Composition API 실무 활용법! 그리고 Firebase 기초부터 실전까지 한 번에 내 것으로 만들 수 있는 강의입니다.
 프론트엔드 웹을 개발할 때 에디터, 무한 스크롤링, 검색 기능, 디버깅 등 다양한 지식이 필요한데요. 해당 강의에서는 실무 경험에서 알 수 있는 다양한 웹 기술까지 습득하여 개발자로서 한 단계 성장할 수 있는 강의입니다.`,
   },
+  {
+    courseSlug: 'nuxt3',
+    title: 'Vue 강의 끝판왕 : Nuxt 3 완벽 마스터',
+    subtitle:
+      'Vue 기반으로 성능이 뛰어난 웹을 빠르게 만들 수 있도록 도와주는 Nuxt 프레임워크 강의입니다. 현업에서 Vue를 사용하고 계신 분들이라면 꼭 보셔야하는 강의라고 자신있게 말씀드릴 수 있을 거 같아요~!',
+    thumbnail: 'https://i.imgur.com/WPQgRzs.png',
+    video: 'https://www.youtube.com/embed/IYtN133pvX4?si=0CG4BH2EACUKp4hP',
+    rating: 5.0,
+    reviewsCount: 6,
+    studentCount: 47,
+    reviewsUrl: 'https://inf.run/VdeXX#reviews',
+    inflearnUrl: 'https://inf.run/VdeXX',
+    gymcodingUrl: 'https://edu.gymcoding.co/p/products',
+    content: `이번 강의를 준비하기 위해서 공식문서를 꼼꼼히 읽어보는 것은 물론이며, 해외 Nuxt3 강의도 직접 결제해서 수강을 했어요! 제가 여태까지 강의를 하면서 쌓았던 노하우와 에너지를 120% 쏟은 강의기 때문에 이번 강의는 Vue 초급자 분들부터 현업에계신 분들에게 유용할 수 있도록 정말 알찬 콘텐츠로 구성했습니다.`,
+  },
 ];
 
 export function getCourses(): CourseWithPath[] {
   return courses.map((item) => ({
     ...item,
-    rating: item.rating.toFixed(1),
-    reviewsCount: item.reviewsCount.toLocaleString(),
-    studentCount: item.studentCount.toLocaleString(),
+    rating: item.rating.toFixed(1), // 5.0
+    reviewsCount: item.reviewsCount.toLocaleString(), // 1000 -> 1,000
+    studentCount: item.studentCount.toLocaleString(), // 12345 -> 12,345
     path: `/course/${item.courseSlug}`,
   }));
 }
@@ -148,5 +162,9 @@ export function getCourseDetails(courseSlug: string): CourseReturn {
   const course = courses[index];
   const prevCourse = index <= 0 ? null : courses[index - 1];
   const nextCourse = index >= courses.length - 1 ? null : courses[index + 1];
-  return { course, prevCourse, nextCourse };
+  return {
+    course,
+    prevCourse,
+    nextCourse,
+  };
 }
