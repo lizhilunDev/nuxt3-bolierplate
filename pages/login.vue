@@ -4,7 +4,8 @@ definePageMeta({
 });
 
 const handleLoginSuccess = async () => {
-  const { isAdmin } = useAuthUser();
+  const authStore = useAuthStore();
+  const { isAdmin } = storeToRefs(authStore);
   const redirect = isAdmin.value ? '/admin' : '/';
   await navigateTo(redirect);
 };

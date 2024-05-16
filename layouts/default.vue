@@ -1,6 +1,8 @@
 <script setup lang="ts">
-const { authUser, isAuthenticated } = useAuthUser();
-const { signOut } = useAuth();
+const authStore = useAuthStore();
+const { user: authUser, isAuthenticated } = storeToRefs(authStore);
+const { signOut } = authStore;
+
 const pageContainerStyle = computed(() => ({
   maxWidth: '1080px',
   margin: '0 auto',
@@ -28,6 +30,8 @@ const { locale } = useI18n();
 const selectedLanguageName = computed(
   () => languages.value.find((lang) => lang.code === locale.value)?.name
 );
+
+watch(locale, (v) => (useCookie('locale').value = v));
 </script>
 
 <template>
